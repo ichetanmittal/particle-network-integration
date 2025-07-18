@@ -1,0 +1,132 @@
+.transaction-demo {
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.transaction-container {
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.transaction-container h3 {
+  color: #333;
+  margin-bottom: 25px;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.balance-section {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.balance-btn {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.balance-btn:hover {
+  background: #218838;
+}
+
+.wallet-address {
+  font-size: 0.9em;
+  color: #666;
+  word-break: break-all;
+}
+
+.transaction-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.form-group select,
+.form-group input {
+  padding: 12px;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  font-size: 1em;
+  transition: border-color 0.2s ease;
+}
+
+.form-group select:focus,
+.form-group input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.send-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 1.1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  margin-top: 10px;
+}
+
+.send-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.send-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.transaction-result {
+  background: #d4edda;
+  border: 1px solid #c3e6cb;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.transaction-result h4 {
+  color: #155724;
+  margin-bottom: 10px;
+}
+
+.tx-hash {
+  font-family: monospace;
+  font-size: 0.9em;
+  color: #155724;
+  word-break: break-all;
+  background: #f8f9fa;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.not-connected {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}

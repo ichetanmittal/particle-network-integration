@@ -26,18 +26,24 @@ const TransactionDemo: React.FC = () => {
 
     try {
       // Use actual Particle Network transaction methods
-      const txData = {
-        to: recipient,
-        value: `0x${(parseFloat(amount) * 1e18).toString(16)}`, // Convert to hex wei
-        data: '0x'
-      };
+      const provider = await particleConnect.connect();
+      if (provider && 'request' in provider) {
+        const txData = {
+          to: recipient,
+          value: `0x${(parseFloat(amount) * 1e18).toString(16)}`, // Convert to hex wei
+          data: '0x'
+        };
 
-      const result = await particleConnect.sendTransaction(txData);
-      setTxHash(result.hash || result);
-      
-      // Reset form
-      setRecipient('');
-      setAmount('');
+        const result = await (provider as any).request({
+          method: 'eth_sendTransaction',
+          params: [txData]
+        });
+        setTxHash(result);
+        
+        // Reset form
+        setRecipient('');
+        setAmount('');
+      }
     } catch (error) {
       console.error('Transaction failed:', error);
       setTxHash('Transaction failed: ' + (error as Error).message);
@@ -51,9 +57,18 @@ const TransactionDemo: React.FC = () => {
 
     try {
       // Use actual Particle Network balance methods
-      const balance = await particleConnect.getBalance();
-      const balanceInEth = (parseInt(balance, 16) / 1e18).toFixed(4);
-      alert(`Balance: ${balanceInEth} ${chains.find(c => c.id === chain)?.symbol}`);
+      const provider = await particleConnect.connect();
+      if (provider && 'request' in provider) {
+        const accounts = await (provider as any).request({ method: 'eth_accounts' });
+        if (accounts && accounts.length > 0) {
+          const balance = await (provider as any).request({
+            method: 'eth_getBalance',
+            params: [accounts[0], 'latest']
+          });
+          const balanceInEth = (parseInt(balance, 16) / 1e18).toFixed(4);
+          alert(`Balance: ${balanceInEth} ${chains.find(c => c.id === chain)?.symbol}`);
+        }
+      }
     } catch (error) {
       console.error('Failed to get balance:', error);
       alert('Failed to get balance');
